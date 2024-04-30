@@ -1,0 +1,134 @@
+{
+"Data": [
+{
+"id": 10101001,
+"name": "ITEM_WEAPON_ONEHAND_001",
+"desc": "ITEM_WEAPON_ONEHAND_DESC_001",
+"sprite": "item_weapon_onehand_001",
+"stackable": false,
+"prefab": "item_weapon_onehand_001",
+"type": "Weapon",
+"ref_id": 20101001
+},
+{
+"id": 10101002,
+"name": "ITEM_WEAPON_ONEHAND_002",
+"desc": "ITEM_WEAPON_ONEHAND_DESC_002",
+"sprite": "item_weapon_onehand_002",
+"stackable": false,
+"prefab": "item_weapon_onehand_002",
+"type": "Weapon",
+"ref_id": 20101002
+},
+{
+"id": 10101003,
+"name": "ITEM_WEAPON_TWOHAND_003",
+"desc": "ITEM_WEAPON_TWOHAND_DESC_003",
+"sprite": "item_weapon_twohand_001",
+"stackable": false,
+"prefab": "item_weapon_twohand_001",
+"type": "Weapon",
+"ref_id": 20102001
+},
+{
+"id": 10102001,
+"name": "ITEM_SHIELD_001",
+"desc": "ITEM_SHIELD_DESC_001",
+"sprite": "item_shield_001",
+"stackable": false,
+"prefab": "item_shield_001",
+"type": "Shield",
+"ref_id": 30101001
+},
+{
+"id": 10103001,
+"name": "ITEM_BOW_001",
+"desc": "ITEM_BOW_001",
+"sprite": "item_bow_001",
+"stackable": false,
+"prefab": "item_bow_001",
+"type": "Bow",
+"ref_id": 0
+},
+{
+"id": 10103101,
+"name": "ITEM_ARROW_001",
+"desc": "ITEM_ARROW_001",
+"sprite": "item_arrow_001",
+"stackable": true,
+"prefab": "item_arrow_001",
+"type": "Bow",
+"ref_id": 0
+},
+{
+"id": 10104001,
+"name": "ITEM_ARMOR_001",
+"desc": "ITEM_ARMOR_001",
+"sprite": "item_armor_001",
+"stackable": false,
+"prefab": "item_armor_001",
+"type": "Armor",
+"ref_id": 0
+},
+{
+"id": 10105001,
+"name": "ITEM_FOOD_001",
+"desc": "ITEM_FOOD_001",
+"sprite": "item_food_001",
+"stackable": true,
+"prefab": "item_food_001",
+"type": "Food",
+"ref_id": 60101001
+},
+{
+"id": 10105002,
+"name": "ITEM_FOOD_002",
+"desc": "ITEM_FOOD_002",
+"sprite": "item_food_002",
+"stackable": true,
+"prefab": "item_food_002",
+"type": "Food",
+"ref_id": 60101002
+},
+{
+"id": 10105003,
+"name": "ITEM_FOOD_003",
+"desc": "ITEM_FOOD_003",
+"sprite": "item_food_003",
+"stackable": true,
+"prefab": "item_food_003",
+"type": "Food",
+"ref_id": 60101003
+},
+{
+"id": 10105004,
+"name": "ITEM_FOOD_004",
+"desc": "ITEM_FOOD_004",
+"sprite": "item_food_004",
+"stackable": true,
+"prefab": "item_food_004",
+"type": "Food",
+"ref_id": 60101004
+},
+{
+"id": 10105005,
+"name": "ITEM_FOOD_005",
+"desc": "ITEM_FOOD_005",
+"sprite": "item_food_005",
+"stackable": true,
+"prefab": "item_food_005",
+"type": "Food",
+"ref_id": 60101005
+},
+{
+"id": 10106001,
+"name": "ITEM_DEFAULT_001",
+"desc": "ITEM_DEFAULT_001",
+"sprite": "item_default_001",
+"stackable": true,
+"prefab": "item_default_001",
+"type": "Default",
+"ref_id": 0
+}
+]
+}
