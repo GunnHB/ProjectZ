@@ -16,6 +16,7 @@ namespace ProjectZ.UI
         public UnityAction<int> OnHealthBarAction;
 
         private System.Collections.Generic.List<HeartObject> _heartList = new();
+        private int _lastFillHeartIndex = 0;
 
         protected override void Init()
         {
@@ -46,10 +47,8 @@ namespace ProjectZ.UI
             // 체력은 5단위
             // 하트 하나는 20
             var maxHeartAmount = _playerStats.MaxHP / 20;
-            // var currFullHeartAmount = _playerStats.CurrentHP / 20;
-            var currFullHeartAmount = 70 / 20;                          // 테스트
-            // var remainValue = _playerStats.CurrentHP % 20;
-            var remainValue = 70 % 20;                                  // 테스트
+            var currFullHeartAmount = _playerStats.CurrentHP / 20;
+            var remainValue = _playerStats.CurrentHP % 20;
 
             bool _emptyHeart = false;   // 빈 하트인지
 
@@ -74,6 +73,8 @@ namespace ProjectZ.UI
 
                             _emptyHeart = true; // 이번 인덱스가 마지막 채워진 하트
                         }
+
+                        _lastFillHeartIndex = index;
                     }
 
                     _heartList.Add(heart);
@@ -105,12 +106,12 @@ namespace ProjectZ.UI
                 _fillHeartCoroutine = null;
             }
 
-            StartCoroutine(nameof(FillHeartCoroutine));
+            StartCoroutine(nameof(FillHeartCoroutine), value);
         }
 
         private System.Collections.IEnumerator FillHeartCoroutine(int value)
         {
-            yield return null;
+            yield break;
         }
     }
 }

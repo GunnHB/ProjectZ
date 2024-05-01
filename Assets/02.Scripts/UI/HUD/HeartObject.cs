@@ -1,10 +1,15 @@
+using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
+
+using Sirenix.OdinInspector;
 
 namespace ProjectZ.UI
 {
     public class HeartObject : MonoBehaviour
     {
+        private const string TITLE_HEART_IMAGE = "[Heart Image]";
         public enum HeartType
         {
             None = -1,
@@ -15,42 +20,27 @@ namespace ProjectZ.UI
             Full,
         }
 
-        [SerializeField] private Image _normalHeart;
-
-        public bool IsFull => _normalHeart.fillAmount == 1f;
+        [Title(TITLE_HEART_IMAGE)]
+        [SerializeField] private List<GameObject> _heartObjList;
 
         private HeartType _heartType;
+
+        private void Awake()
+        {
+            // 일단 다 끄기
+            foreach (var item in _heartObjList)
+                item.SetActive(false);
+        }
 
         public void SetHeart(HeartType type)
         {
             _heartType = type;
 
-            FillHeartByType();
-        }
-
-        private void FillHeartByType()
-        {
-            if (_heartType == HeartType.None)
+            if (_heartType == HeartType.None || _heartType == HeartType.Empty)
                 return;
 
-            switch (_heartType)
-            {
-                case HeartType.Empty:
-                    _normalHeart.fillAmount = 0f;
-                    break;
-                case HeartType.AQuarter:
-                    _normalHeart.fillAmount = .25f;
-                    break;
-                case HeartType.Half:
-                    _normalHeart.fillAmount = .5f;
-                    break;
-                case HeartType.ThreeQaurter:
-                    _normalHeart.fillAmount = .75f;
-                    break;
-                case HeartType.Full:
-                    _normalHeart.fillAmount = 1f;
-                    break;
-            }
+            for (int index = 0; index < (int)_heartType; index++)
+                _heartObjList[index].SetActive(true);
         }
     }
 }
