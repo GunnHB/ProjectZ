@@ -27,6 +27,8 @@ namespace ProjectZ.Core.Characters
         protected override void Update()
         {
             base.Update();
+
+            UpdateHP_Test();
         }
 
         private void InitAnimData()
@@ -34,6 +36,12 @@ namespace ProjectZ.Core.Characters
             _animData = new Data.EnemyAnimationData();
 
             _animData.InitializeData();
+        }
+
+        private void UpdateHP_Test()
+        {
+            if (Input.GetKeyDown(KeyCode.Z))
+                _stats.UpdateCurrentHP(40);
         }
 
         // #region Attack

@@ -37,16 +37,18 @@ namespace ProjectZ.Core.Characters
             if (_isDeath)
                 return;
 
-            CurrentHP = (int)Mathf.Clamp(CurrentHP - amount, 0f, _maxHP);
-
-            OnUpdateHPEvent?.Invoke(amount);
+            CurrentHP = (int)Mathf.Clamp(CurrentHP + amount, 0f, _maxHP);
 
             // 체력이 0이면 죽음
-            if (CurrentHP <= 0)
+            if (CurrentHP == 0)
             {
                 _isDeath = true;
                 OnDeathEvent?.Invoke();
+
+                return;
             }
+
+            OnUpdateHPEvent?.Invoke(amount);
         }
     }
 }

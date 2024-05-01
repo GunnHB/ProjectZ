@@ -45,18 +45,6 @@ namespace ProjectZ.Core.Characters
             OpenPlayerHealthUI();
         }
 
-        private void OnEnable()
-        {
-            if (_healthBar != null)
-                OnUpdateHPEvent.AddListener(_healthBar.OnUpdateHealthBarAction);
-        }
-
-        private void OnDisable()
-        {
-            if (_healthBar != null)
-                OnUpdateHPEvent.RemoveListener(_healthBar.OnUpdateHealthBarAction);
-        }
-
         private void OpenPlayerHealthUI()
         {
             _healthBar = Manager.UIManager.Instance.OpenUI<UIPlayerHealthBarHUD>();
@@ -64,7 +52,10 @@ namespace ProjectZ.Core.Characters
             if (_healthBar == null)
                 return;
 
-            _healthBar.InitHeart(_maxHP);
+            _healthBar.InitHeart(this);
+
+            OnUpdateHPEvent.RemoveListener((int value) => _healthBar.OnHealthBarAction?.Invoke(value));
+            OnUpdateHPEvent.AddListener((int value) => _healthBar.OnHealthBarAction?.Invoke(value));
         }
 
         public void SetStamina(float amount)

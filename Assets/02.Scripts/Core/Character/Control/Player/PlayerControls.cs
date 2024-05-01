@@ -67,7 +67,7 @@ namespace ProjectZ.Core.Characters
 
             _movement.MovementAction?.Invoke(_moveDirection);
 
-            // UpdateHeart();
+            UpdateHP_Test();
         }
 
         private void InitAnimData()
@@ -157,6 +157,14 @@ namespace ProjectZ.Core.Characters
             throw new System.NotImplementedException();
         }
         #endregion
+
+        private void UpdateHP_Test()
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+                _stats.UpdateCurrentHP(15);
+            else if (Input.GetKeyDown(KeyCode.E))
+                _stats.UpdateCurrentHP(-15);
+        }
 
         // #region Attack
         // public void AttackTarget(CharacterControls controls)

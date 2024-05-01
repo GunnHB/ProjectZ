@@ -74,8 +74,8 @@ namespace ProjectZ.Core.Characters
             GroundCheckFunc += IsGround;
             PeakCheckFunc += IsPeak;
 
-            if (TryGetComponent(out CharacterStats stats))
-                stats.OnDeathEvent.AddListener(OnDeathCallback);
+            if (TryGetComponent(out CharacterControls controls))
+                controls.ThisStats.OnDeathEvent.AddListener(OnDeathCallback);
         }
 
         private void OnDisable()
@@ -85,8 +85,8 @@ namespace ProjectZ.Core.Characters
             GroundCheckFunc -= IsGround;
             PeakCheckFunc -= IsPeak;
 
-            if (TryGetComponent(out CharacterStats stats))
-                stats.OnDeathEvent.RemoveListener(OnDeathCallback);
+            if (TryGetComponent(out CharacterControls controls))
+                controls.ThisStats.OnDeathEvent.RemoveListener(OnDeathCallback);
         }
 
         private void InitSpeed()
