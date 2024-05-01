@@ -4,11 +4,9 @@ using UnityEngine;
 using Cinemachine;
 using Sirenix.OdinInspector;
 
-using ProjectZ.Item;
-
 namespace ProjectZ.Core.Characters
 {
-    public partial class PlayerControls : CharacterControls, IAttackable, IDamagable
+    public partial class PlayerControls : CharacterControls, IAttackable
     {
         private const string TITLE_COMPONENTS = "[Components]";
 
@@ -58,7 +56,7 @@ namespace ProjectZ.Core.Characters
             InitAnimData();
             InitStates();
             InitAllEvents();
-            InitAttackDatas();
+            // InitAttackDatas();
         }
 
         protected override void Update()
@@ -69,7 +67,7 @@ namespace ProjectZ.Core.Characters
 
             _movement.MovementAction?.Invoke(_moveDirection);
 
-            UpdateHeart();
+            // UpdateHeart();
         }
 
         private void InitAnimData()
@@ -148,66 +146,76 @@ namespace ProjectZ.Core.Characters
             // 충전 불가능한 상태에서는 속도가 느려짐
             DoSetMovementSpeed(!active ? MovementType.Exhaust : MovementType.Normal);
         }
-        #endregion
-
-        #region Attack
-        public void AttackTarget(CharacterControls controls)
-        {
-
-        }
 
         public void InitAttackDatas()
         {
-            _lightAttackDataList = new()
-            {
-                new AttackData(_animData.AnimNameLightAttack01, .45f),
-                new AttackData(_animData.AnimNameLightAttack02, .5f),
-            };
-
-            _heavyAttackDataList = new();
-        }
-
-        public override void AnimEventHitCheakStart()
-        {
-            base.AnimEventHitCheakStart();
-
-            // if (_weaponTester == null)
-            //     return;
-
-            // _weaponTester.HitCollider.enabled = true;
-        }
-
-        public override void AnimEventHitCheakFinish()
-        {
-            base.AnimEventHitCheakFinish();
-
-            // if (_weaponTester == null)
-            //     return;
-
-            // _weaponTester.HitCollider.enabled = false;
-        }
-        #endregion
-
-        #region Damage
-        public void TakeDamage(int damageAmount)
-        {
             throw new System.NotImplementedException();
         }
 
-        public void OnUpdateHP(int value)
+        public void AttackTarget(CharacterControls controls)
         {
             throw new System.NotImplementedException();
         }
         #endregion
 
-        #region ~~ 테슽으 ~~ (나중에 지울 것)
-        private void UpdateHeart()
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-                _stats.UpdateCurrentHP(15);
-            else if (Input.GetKeyDown(KeyCode.E))
-                _stats.UpdateCurrentHP(-20);
-        }
-        #endregion
+        // #region Attack
+        // public void AttackTarget(CharacterControls controls)
+        // {
+
+        // }
+
+        // public void InitAttackDatas()
+        // {
+        //     _lightAttackDataList = new()
+        //     {
+        //         new AttackData(_animData.AnimNameLightAttack01, .45f),
+        //         new AttackData(_animData.AnimNameLightAttack02, .5f),
+        //     };
+
+        //     _heavyAttackDataList = new();
+        // }
+
+        // public override void AnimEventHitCheakStart()
+        // {
+        //     base.AnimEventHitCheakStart();
+
+        //     // if (_weaponTester == null)
+        //     //     return;
+
+        //     // _weaponTester.HitCollider.enabled = true;
+        // }
+
+        // public override void AnimEventHitCheakFinish()
+        // {
+        //     base.AnimEventHitCheakFinish();
+
+        //     // if (_weaponTester == null)
+        //     //     return;
+
+        //     // _weaponTester.HitCollider.enabled = false;
+        // }
+        // #endregion
+
+        // #region Damage
+        // public void TakeDamage(int damageAmount)
+        // {
+        //     throw new System.NotImplementedException();
+        // }
+
+        // public void OnUpdateHP(int value)
+        // {
+        //     throw new System.NotImplementedException();
+        // }
+        // #endregion
+
+        // #region ~~ 테슽으 ~~ (나중에 지울 것)
+        // private void UpdateHeart()
+        // {
+        //     if (Input.GetKeyDown(KeyCode.Q))
+        //         _stats.UpdateCurrentHP(15);
+        //     else if (Input.GetKeyDown(KeyCode.E))
+        //         _stats.UpdateCurrentHP(-20);
+        // }
+        // #endregion
     }
 }

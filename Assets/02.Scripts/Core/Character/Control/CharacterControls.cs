@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 namespace ProjectZ.Core.Characters
 {
     [RequireComponent(typeof(Movement))]
-    public class CharacterControls : MonoBehaviour
+    public class CharacterControls : MonoBehaviour, IDamagable
     {
         private const string TITLE_COMMON = "[Common]";
 
@@ -26,8 +26,8 @@ namespace ProjectZ.Core.Characters
         public CharacterStats ThisStats => _stats;
 
         // collections
-        protected List<AttackData> _lightAttackDataList;
-        protected List<AttackData> _heavyAttackDataList;
+        protected List<Data.AttackData> _lightAttackDataList;
+        protected List<Data.AttackData> _heavyAttackDataList;
 
         // flags
         protected bool _getHitted = false;
@@ -43,12 +43,14 @@ namespace ProjectZ.Core.Characters
 
         protected virtual void OnEnable()
         {
-
+            _stats.OnUpdateHPEvent.AddListener(OnUpdateHP);
+            _stats.OnDeathEvent.RemoveListener(OnDeath);
         }
 
         protected virtual void OnDisable()
         {
-
+            _stats.OnUpdateHPEvent.RemoveListener(OnUpdateHP);
+            _stats.OnDeathEvent.RemoveListener(OnDeath);
         }
 
         protected virtual void Update()
@@ -85,5 +87,29 @@ namespace ProjectZ.Core.Characters
         {
 
         }
+
+        #region IDamagable
+        public void TakeDamage(int damageAmount)
+        {
+            _stats.UpdateCurrentHP(damageAmount);
+        }
+
+        public void OnUpdateHP(int value)
+        {
+            if (value == 0)
+                return;
+            else if (value < 0)
+            {
+                _animator.applyRootMotion = true;
+                _animator.CrossFade(_animData.AnimNameGetDamageFront, .1f);
+            }
+        }
+
+        public void OnDeath()
+        {
+            _animator.applyRootMotion = true;
+            _animator.CrossFade(_animData.AnimNameDeath, .1f);
+        }
+        #endregion
     }
 }

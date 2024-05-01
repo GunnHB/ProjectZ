@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ProjectZ.Core.Characters
 {
-    public class EnemyControls : CharacterControls, IAttackable, IDamagable
+    public class EnemyControls : CharacterControls
     {
         // properties
         public EnemyStats ThisEnemyStats => _stats as EnemyStats;
@@ -17,23 +17,11 @@ namespace ProjectZ.Core.Characters
         protected override void OnEnable()
         {
             base.OnEnable();
-
-            // ThisStats.OnGetDamageEvent += OnGetDamageCallback;
-            // ThisStats.OnDeathEvent += OnDeathCallback;
-
-            ThisStats.OnUpdateHPEvent.AddListener(OnUpdateHP);
-            ThisStats.OnDeathEvent.AddListener(OnDeathCallback);
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-
-            // ThisStats.OnGetDamageEvent -= OnGetDamageCallback;
-            // ThisStats.OnDeathEvent -= OnDeathCallback;
-
-            ThisStats.OnUpdateHPEvent.RemoveListener(OnUpdateHP);
-            ThisStats.OnDeathEvent.RemoveListener(OnDeathCallback);
         }
 
         protected override void Update()
@@ -48,41 +36,41 @@ namespace ProjectZ.Core.Characters
             _animData.InitializeData();
         }
 
-        #region Attack
-        public void InitAttackDatas()
-        {
-            throw new System.NotImplementedException();
-        }
+        // #region Attack
+        // public void InitAttackDatas()
+        // {
+        //     throw new System.NotImplementedException();
+        // }
 
-        public void AttackTarget(CharacterControls controls)
-        {
-            throw new System.NotImplementedException();
-        }
-        #endregion
+        // public void AttackTarget(CharacterControls controls)
+        // {
+        //     throw new System.NotImplementedException();
+        // }
+        // #endregion
 
-        #region Damage
-        public void TakeDamage(int damageAmount)
-        {
-            ThisStats.UpdateCurrentHP((int)damageAmount);
-        }
+        // #region Damage
+        // public void TakeDamage(int damageAmount)
+        // {
+        //     ThisStats.UpdateCurrentHP((int)damageAmount);
+        // }
 
-        public void OnUpdateHP(int value)
-        {
-            _animator.applyRootMotion = true;
-            _animator.CrossFade(_animData.AnimNameGetDamageFront, .1f);
-        }
+        // public void OnUpdateHP(int value)
+        // {
+        //     _animator.applyRootMotion = true;
+        //     _animator.CrossFade(_animData.AnimNameGetDamageFront, .1f);
+        // }
 
-        private void OnGetDamageCallback()
-        {
-            // _animator.applyRootMotion = true;
-            // _animator.CrossFade(_animData.AnimNameGetDamageFront, .1f);
-        }
+        // private void OnGetDamageCallback()
+        // {
+        //     // _animator.applyRootMotion = true;
+        //     // _animator.CrossFade(_animData.AnimNameGetDamageFront, .1f);
+        // }
 
-        private void OnDeathCallback()
-        {
-            _animator.applyRootMotion = true;
-            _animator.CrossFade(_animData.AnimNameDeath, .1f);
-        }
-        #endregion
+        // private void OnDeathCallback()
+        // {
+        //     _animator.applyRootMotion = true;
+        //     _animator.CrossFade(_animData.AnimNameDeath, .1f);
+        // }
+        // #endregion
     }
 }

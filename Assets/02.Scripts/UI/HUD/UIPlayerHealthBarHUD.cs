@@ -11,6 +11,8 @@ namespace ProjectZ.UI
     {
         [SerializeField] private ObjectPool _heartPool;
 
+        public UnityAction<int> OnUpdateHealthBarAction;
+
         protected override void Init()
         {
             base.Init();
@@ -20,20 +22,20 @@ namespace ProjectZ.UI
         {
             base.OnEnable();
 
-            // StatsManager.Instance.OnPlayerHPEvent.AddListener((int value) =>
-            // {
-            //     OnHeartCallbackBySequence(value);
-            // });
+            OnUpdateHealthBarAction += (int value) =>
+            {
+                UpdateHealthBar(value);
+            };
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
 
-            // StatsManager.Instance.OnPlayerHPEvent.RemoveListener((int value) =>
-            // {
-            //     OnHeartCallbackBySequence(value);
-            // });
+            OnUpdateHealthBarAction -= (int value) =>
+            {
+                UpdateHealthBar(value);
+            };
         }
 
         public void InitHeart(int maxHP)

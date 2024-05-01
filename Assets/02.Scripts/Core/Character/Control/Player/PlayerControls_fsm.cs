@@ -1,4 +1,3 @@
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine.Events;
 
 namespace ProjectZ.Core.Characters
@@ -26,7 +25,7 @@ namespace ProjectZ.Core.Characters
         public UnityAction JumpStateAction;
         public UnityAction FallingStateAction;
         public UnityAction LandingStateAction;
-        public UnityAction<AttackData> AttackStateAction;
+        public UnityAction<Data.AttackData> AttackStateAction;
 
         private void InitStates()
         {
@@ -127,7 +126,7 @@ namespace ProjectZ.Core.Characters
         #endregion
 
         #region AttackState
-        private void AttackStateCallback(AttackData attackData)
+        private void AttackStateCallback(Data.AttackData attackData)
         {
             // // set attackdata
             (_attackState as FSM.AttackState).ThisAttackData = attackData;

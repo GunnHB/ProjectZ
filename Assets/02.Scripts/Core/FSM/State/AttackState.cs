@@ -4,11 +4,11 @@ namespace ProjectZ.Core.FSM
 {
     public class AttackState : BaseState
     {
-        private AttackData _currentAttackData;
-        private AttackData _nextAttackData;
+        private Data.AttackData _currentAttackData;
+        private Data.AttackData _nextAttackData;
 
         // properties
-        public AttackData ThisAttackData
+        public Data.AttackData ThisAttackData
         {
             set
             {

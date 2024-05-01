@@ -16,6 +16,9 @@ namespace ProjectZ.Core.Characters
         public float MaxStamina => _maxStamina;
         public float CurrentStamina { get; protected set; }
 
+        // ui
+        private UIPlayerHealthBarHUD _healthBar;
+
         // delegate
         public delegate void OnExhausted();
         public event OnExhausted OnExhaustedEvent;
@@ -42,14 +45,26 @@ namespace ProjectZ.Core.Characters
             OpenPlayerHealthUI();
         }
 
+        private void OnEnable()
+        {
+            if (_healthBar != null)
+                OnUpdateHPEvent.AddListener(_healthBar.OnUpdateHealthBarAction);
+        }
+
+        private void OnDisable()
+        {
+            if (_healthBar != null)
+                OnUpdateHPEvent.RemoveListener(_healthBar.OnUpdateHealthBarAction);
+        }
+
         private void OpenPlayerHealthUI()
         {
-            var health = Manager.UIManager.Instance.OpenUI<UIPlayerHealthBarHUD>();
+            _healthBar = Manager.UIManager.Instance.OpenUI<UIPlayerHealthBarHUD>();
 
-            if (health == null)
+            if (_healthBar == null)
                 return;
 
-            health.InitHeart(_maxHP);
+            _healthBar.InitHeart(_maxHP);
         }
 
         public void SetStamina(float amount)

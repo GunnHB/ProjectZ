@@ -16,15 +16,6 @@ namespace ProjectZ.Core.Characters
 
         public int CurrentHP { get; protected set; }
 
-        // UnityEvent로 수정
-        // public delegate void OnDeath();
-        // public event OnDeath OnDeathEvent;
-
-        // public delegate void OnGetDamage();
-        // public event OnGetDamage OnGetDamageEvent;
-
-        // public UnityEvent OnHealEvent = new();
-        // public UnityEvent OnGetDamageEvent = new();
         public UnityEvent<int> OnUpdateHPEvent = new();
         public UnityEvent OnDeathEvent = new();
 
@@ -48,10 +39,6 @@ namespace ProjectZ.Core.Characters
 
             CurrentHP = (int)Mathf.Clamp(CurrentHP - amount, 0f, _maxHP);
 
-            // if (amount < 0)
-            //     OnGetDamageEvent?.Invoke();
-            // else
-            //     OnHealEvent?.Invoke();
             OnUpdateHPEvent?.Invoke(amount);
 
             // 체력이 0이면 죽음
