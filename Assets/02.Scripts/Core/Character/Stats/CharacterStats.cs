@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 using Sirenix.OdinInspector;
 
@@ -15,11 +16,17 @@ namespace ProjectZ.Core.Characters
 
         public int CurrentHP { get; protected set; }
 
-        public delegate void OnDeath();
-        public event OnDeath OnDeathEvent;
+        // UnityEvent로 수정
+        // public delegate void OnDeath();
+        // public event OnDeath OnDeathEvent;
 
-        public delegate void OnGetDamage();
-        public event OnGetDamage OnGetDamageEvent;
+        // public delegate void OnGetDamage();
+        // public event OnGetDamage OnGetDamageEvent;
+
+        // public UnityEvent OnHealEvent = new();
+        // public UnityEvent OnGetDamageEvent = new();
+        public UnityEvent<int> OnUpdateHPEvent = new();
+        public UnityEvent OnDeathEvent = new();
 
         private bool _isDeath = false;
 
@@ -30,13 +37,22 @@ namespace ProjectZ.Core.Characters
             _isDeath = false;
         }
 
-        public void SetHP(int amount)
+        /// <summary>
+        /// 현재 체력 값 갱신
+        /// </summary>
+        /// <param name="amount">증가 / 감소시킬 수치</param>
+        public void UpdateCurrentHP(int amount)
         {
             if (_isDeath)
                 return;
 
             CurrentHP = (int)Mathf.Clamp(CurrentHP - amount, 0f, _maxHP);
-            OnGetDamageEvent?.Invoke();
+
+            // if (amount < 0)
+            //     OnGetDamageEvent?.Invoke();
+            // else
+            //     OnHealEvent?.Invoke();
+            OnUpdateHPEvent?.Invoke(amount);
 
             // 체력이 0이면 죽음
             if (CurrentHP <= 0)

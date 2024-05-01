@@ -19,11 +19,21 @@ namespace ProjectZ.UI
         protected override void OnEnable()
         {
             base.OnEnable();
+
+            // StatsManager.Instance.OnPlayerHPEvent.AddListener((int value) =>
+            // {
+            //     OnHeartCallbackBySequence(value);
+            // });
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
+
+            // StatsManager.Instance.OnPlayerHPEvent.RemoveListener((int value) =>
+            // {
+            //     OnHeartCallbackBySequence(value);
+            // });
         }
 
         public void InitHeart(int maxHP)
@@ -47,19 +57,9 @@ namespace ProjectZ.UI
             }
         }
 
-        private void OnHeartCallback(int currentHP)
+        private Sequence UpdateHealthBar(int heartValue)
         {
-            HeartSequence(currentHP);
-        }
-
-        private Sequence HeartSequence(int currentHP)
-        {
-            int target = currentHP / 5;
-
             return DOTween.Sequence();
-
-            // return DOTween.Sequence()
-            //                 .Append();
         }
     }
 }

@@ -68,6 +68,8 @@ namespace ProjectZ.Core.Characters
             _stateMachine.DoOperatorUpdate();
 
             _movement.MovementAction?.Invoke(_moveDirection);
+
+            UpdateHeart();
         }
 
         private void InitAnimData()
@@ -187,9 +189,24 @@ namespace ProjectZ.Core.Characters
         #endregion
 
         #region Damage
-        public void TakeDamage(float damageAmount)
+        public void TakeDamage(int damageAmount)
         {
-            Debug.Log(damageAmount);
+            throw new System.NotImplementedException();
+        }
+
+        public void OnUpdateHP(int value)
+        {
+            throw new System.NotImplementedException();
+        }
+        #endregion
+
+        #region ~~ 테슽으 ~~ (나중에 지울 것)
+        private void UpdateHeart()
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+                _stats.UpdateCurrentHP(15);
+            else if (Input.GetKeyDown(KeyCode.E))
+                _stats.UpdateCurrentHP(-20);
         }
         #endregion
     }

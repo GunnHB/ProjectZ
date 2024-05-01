@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 2390802960
+CRC: 3679999483
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b9a1ad0e02b1788d4abd24edc2af39c6
+    Hash: 9cc66556d1b4af3cae6c8359f4eb04fe
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 84c324de4cf90623bc556fbbb8e1f458
+    Hash: 6bf3bd4ed869771be5d0cd877c31e36c
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: b9a1ad0e02b1788d4abd24edc2af39c6
+    Hash: 9cc66556d1b4af3cae6c8359f4eb04fe
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -125,8 +125,6 @@ SerializeReferenceClassIdentifiers:
   ClassName: TMPro.VertexGradient
 - AssemblyName: UnityEngine.CoreModule
   ClassName: UnityEngine.Events.PersistentCallGroup
-- AssemblyName: UnityEngine.CoreModule
-  ClassName: UnityEngine.Events.UnityEvent`1[System.Int32]
 - AssemblyName: UnityEngine.CoreModule
   ClassName: UnityEngine.RectOffset
 - AssemblyName: UnityEngine.TextCoreFontEngineModule

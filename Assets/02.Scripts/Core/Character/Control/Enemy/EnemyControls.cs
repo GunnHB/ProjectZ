@@ -18,16 +18,22 @@ namespace ProjectZ.Core.Characters
         {
             base.OnEnable();
 
-            ThisStats.OnGetDamageEvent += OnGetDamageCallback;
-            ThisStats.OnDeathEvent += OnDeathCallback;
+            // ThisStats.OnGetDamageEvent += OnGetDamageCallback;
+            // ThisStats.OnDeathEvent += OnDeathCallback;
+
+            ThisStats.OnUpdateHPEvent.AddListener(OnUpdateHP);
+            ThisStats.OnDeathEvent.AddListener(OnDeathCallback);
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
 
-            ThisStats.OnGetDamageEvent -= OnGetDamageCallback;
-            ThisStats.OnDeathEvent -= OnDeathCallback;
+            // ThisStats.OnGetDamageEvent -= OnGetDamageCallback;
+            // ThisStats.OnDeathEvent -= OnDeathCallback;
+
+            ThisStats.OnUpdateHPEvent.RemoveListener(OnUpdateHP);
+            ThisStats.OnDeathEvent.RemoveListener(OnDeathCallback);
         }
 
         protected override void Update()
@@ -55,15 +61,21 @@ namespace ProjectZ.Core.Characters
         #endregion
 
         #region Damage
-        public void TakeDamage(float damageAmount)
+        public void TakeDamage(int damageAmount)
         {
-            ThisStats.SetHP((int)damageAmount);
+            ThisStats.UpdateCurrentHP((int)damageAmount);
+        }
+
+        public void OnUpdateHP(int value)
+        {
+            _animator.applyRootMotion = true;
+            _animator.CrossFade(_animData.AnimNameGetDamageFront, .1f);
         }
 
         private void OnGetDamageCallback()
         {
-            _animator.applyRootMotion = true;
-            _animator.CrossFade(_animData.AnimNameGetDamageFront, .1f);
+            // _animator.applyRootMotion = true;
+            // _animator.CrossFade(_animData.AnimNameGetDamageFront, .1f);
         }
 
         private void OnDeathCallback()

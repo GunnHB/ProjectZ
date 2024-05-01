@@ -65,40 +65,28 @@ namespace ProjectZ.Core.Characters
             _controller = GetComponent<CharacterController>();
 
             InitSpeed();
-            InitAllCallbacks();
         }
 
-        private void InitAllCallbacks()
+        private void OnEnable()
         {
-            SetMovementCallback();
-            SetJumpCallback();
-            SetGroundCheckCallback();
-            SetPeakCheckCallback();
-            SetDeathCallback();
+            MovementAction += MovementCallback;
+            JumpAction += JumpCallback;
+            GroundCheckFunc += IsGround;
+            PeakCheckFunc += IsPeak;
+
+            if (TryGetComponent(out CharacterStats stats))
+                stats.OnDeathEvent.AddListener(OnDeathCallback);
         }
 
-        private void SetMovementCallback()
+        private void OnDisable()
         {
             MovementAction -= MovementCallback;
-            MovementAction += MovementCallback;
-        }
-
-        private void SetJumpCallback()
-        {
             JumpAction -= JumpCallback;
-            JumpAction += JumpCallback;
-        }
-
-        private void SetGroundCheckCallback()
-        {
             GroundCheckFunc -= IsGround;
-            GroundCheckFunc += IsGround;
-        }
-
-        private void SetPeakCheckCallback()
-        {
             PeakCheckFunc -= IsPeak;
-            PeakCheckFunc += IsPeak;
+
+            if (TryGetComponent(out CharacterStats stats))
+                stats.OnDeathEvent.RemoveListener(OnDeathCallback);
         }
 
         private void InitSpeed()
@@ -201,15 +189,6 @@ namespace ProjectZ.Core.Characters
         {
             if (IsGround())
                 _wasPeaked = false;
-        }
-
-        private void SetDeathCallback()
-        {
-            if (TryGetComponent(out CharacterControls controls))
-            {
-                controls.ThisStats.OnDeathEvent -= OnDeathCallback;
-                controls.ThisStats.OnDeathEvent += OnDeathCallback;
-            }
         }
 
         private void OnDeathCallback()
