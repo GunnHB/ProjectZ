@@ -16,6 +16,7 @@ namespace ProjectZ.Manager
             InitSingletonObject<GameManager>();
             InitSingletonObject<AtlasManager>();
             InitSingletonObject<ItemManager>();
+            InitSingletonObject<StatusManager>();
         }
 
         private void InitSingletonObject<T>()
