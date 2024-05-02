@@ -202,6 +202,7 @@ namespace ProjectZ.UI
         private Sequence OpenSequence()
         {
             return DOTween.Sequence()
+                        .SetAutoKill(false)
                         .OnStart(() =>
                         {
                             // 애니 시작 시 버튼 비활성화
@@ -228,6 +229,7 @@ namespace ProjectZ.UI
         private Sequence CloseSequence(UnityEngine.Events.UnityAction startListener = null)
         {
             return DOTween.Sequence()
+                        .SetAutoKill(false)
                         .OnStart(() =>
                         {
                             if (startListener != null)

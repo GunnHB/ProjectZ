@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -15,7 +16,6 @@ namespace ProjectZ.UI
         public enum HeartType
         {
             None = -1,
-            Empty,
             AQuarter,
             Half,
             ThreeQaurter,
@@ -27,8 +27,21 @@ namespace ProjectZ.UI
 
         private HeartType _heartType;
 
+        private Dictionary<HeartType, Image> _heartDictionary;
+
+        private Coroutine _activeHeartCoroutine;
+
         private void Awake()
         {
+            // 딕셔너리 등록
+            _heartDictionary = new()
+            {
+                {HeartType.AQuarter, _heartObjList[0]},
+                {HeartType.Half, _heartObjList[1]},
+                {HeartType.ThreeQaurter, _heartObjList[2]},
+                {HeartType.Full, _heartObjList[3]},
+            };
+
             // 일단 다 끄기
             foreach (var item in _heartObjList)
                 item.gameObject.SetActive(false);
@@ -38,11 +51,17 @@ namespace ProjectZ.UI
         {
             _heartType = type;
 
-            if (_heartType == HeartType.None || _heartType == HeartType.Empty)
+            if (_heartType == HeartType.None)
                 return;
 
-            for (int index = 0; index < (int)_heartType; index++)
+            for (int index = 0; index < (int)_heartType + 1; index++)
                 _heartObjList[index].gameObject.SetActive(true);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.T))
+                ActiveHeart(HeartType.AQuarter);
         }
 
         /// <summary>
@@ -64,10 +83,44 @@ namespace ProjectZ.UI
         {
             var sequence = DOTween.Sequence();
 
-            for (int index = 0; index < (int)targetType; index++)
-                sequence.Append(DOTween.To(() => 0f, x => _heartObjList[index].gameObject.SetActive(false), 0f, .2f));
+            for (int index = (int)HeartType.Full - 1; index >= (int)targetType; index--)
+            {
+                sequence.AppendCallback(() =>
+                        {
+                            _heartObjList[index].gameObject.SetActive(false);
+                            Debug.Log($"{name}'s {_heartObjList[index]} is deactive");
+                        })
+                        .SetDelay(.05f);
+            }
 
             return sequence;
+        }
+
+        public void ActiveHeart(HeartType targetType)
+        {
+            if (_activeHeartCoroutine != null)
+            {
+                StopCoroutine(_activeHeartCoroutine);
+                _activeHeartCoroutine = null;
+            }
+
+            _activeHeartCoroutine = StartCoroutine(nameof(ActiveHeartCoroutine), targetType);
+        }
+
+        private IEnumerator ActiveHeartCoroutine(HeartType targetType)
+        {
+            HeartType tempType = HeartType.Full;
+
+            while (true)
+            {
+                if (tempType == targetType)
+                    yield break;
+
+                _heartDictionary[tempType].gameObject.SetActive(false);
+                tempType -= 1;
+
+                yield return new WaitForSeconds(.05f);
+            }
         }
     }
 }

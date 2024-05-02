@@ -63,7 +63,7 @@ namespace ProjectZ.UI
                     tempHeart.transform.SetAsLastSibling();
 
                     if (_emptyHeart)
-                        heart.SetHeart(HeartObject.HeartType.Empty);
+                        heart.SetHeart(HeartObject.HeartType.None);
                     else
                     {
                         if (index < currFullHeartAmount)
@@ -95,35 +95,22 @@ namespace ProjectZ.UI
                 return HeartObject.HeartType.ThreeQaurter;
             else if (Mathf.Approximately(value, 1f))
                 return HeartObject.HeartType.Full;
-
-            return HeartObject.HeartType.Empty;
+            else
+                return HeartObject.HeartType.None;
         }
 
         private Sequence OnHealthBarCallback(int value)
         {
             var sequence = DOTween.Sequence();
 
+            var targetIndex = Mathf.Abs(value) / 5;
+
+            for (int index = 0; index < targetIndex; index++)
+            {
+                // _heartList[_lastFillHeartIndex].SetHeart(())
+            }
+
             return sequence;
         }
-
-        // private void StartFillHeartCoroutine(int value)
-        // {
-        //     if (_fillHeartCoroutine != null)
-        //     {
-        //         StopCoroutine(_fillHeartCoroutine);
-        //         _fillHeartCoroutine = null;
-        //     }
-
-        //     StartCoroutine(nameof(FillHeartCoroutine), value);
-        // }
-
-        // private System.Collections.IEnumerator FillHeartCoroutine(int value)
-        // {
-        //     var calcValue = value;
-
-
-
-        //     yield break;
-        // }
     }
 }
