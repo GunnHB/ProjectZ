@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.Events;
 
 using ProjectZ.Manager;
-using System;
+
+using DG.Tweening;
 
 namespace ProjectZ.UI
 {
@@ -27,14 +28,14 @@ namespace ProjectZ.UI
         {
             base.OnEnable();
 
-            OnHealthBarAction += StartFillHeartCoroutine;
+            OnHealthBarAction += (int value) => OnHealthBarCallback(value);
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
 
-            OnHealthBarAction -= StartFillHeartCoroutine;
+            OnHealthBarAction -= (int value) => OnHealthBarCallback(value);
         }
 
         public void InitHeart(Core.Characters.PlayerStats stats)
@@ -98,20 +99,31 @@ namespace ProjectZ.UI
             return HeartObject.HeartType.Empty;
         }
 
-        private void StartFillHeartCoroutine(int value)
+        private Sequence OnHealthBarCallback(int value)
         {
-            if (_fillHeartCoroutine != null)
-            {
-                StopCoroutine(_fillHeartCoroutine);
-                _fillHeartCoroutine = null;
-            }
+            var sequence = DOTween.Sequence();
 
-            StartCoroutine(nameof(FillHeartCoroutine), value);
+            return sequence;
         }
 
-        private System.Collections.IEnumerator FillHeartCoroutine(int value)
-        {
-            yield break;
-        }
+        // private void StartFillHeartCoroutine(int value)
+        // {
+        //     if (_fillHeartCoroutine != null)
+        //     {
+        //         StopCoroutine(_fillHeartCoroutine);
+        //         _fillHeartCoroutine = null;
+        //     }
+
+        //     StartCoroutine(nameof(FillHeartCoroutine), value);
+        // }
+
+        // private System.Collections.IEnumerator FillHeartCoroutine(int value)
+        // {
+        //     var calcValue = value;
+
+
+
+        //     yield break;
+        // }
     }
 }
