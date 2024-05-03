@@ -101,19 +101,25 @@ namespace ProjectZ.Manager
 
             AddItem(new InventoryItemData()
             {
-                _inventoryItemData = Model.ModelItem.Model.DataList[0],
+                _inventoryItemData = Model.ModelItem.Model.GetData(10101001),
                 _isEquip = true,
             });
 
             AddItem(new InventoryItemData()
             {
-                _inventoryItemData = Model.ModelItem.Model.DataList.Last(),
+                _inventoryItemData = Model.ModelItem.Model.GetData(10106001),
                 _itemAmount = 7,
             });
 
             AddItem(new InventoryItemData()
             {
-                _inventoryItemData = Model.ModelItem.Model.DataList[7],
+                _inventoryItemData = Model.ModelItem.Model.GetData(10105001),
+                _itemAmount = 15,
+            });
+
+            AddItem(new InventoryItemData()
+            {
+                _inventoryItemData = Model.ModelItem.Model.GetData(10105003),
                 _itemAmount = 15,
             });
         }

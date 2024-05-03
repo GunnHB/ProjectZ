@@ -9,6 +9,7 @@ using ProjectZ.Manager;
 using Sirenix.OdinInspector;
 
 using DG.Tweening;
+using System.Collections.Generic;
 
 namespace ProjectZ.UI
 {

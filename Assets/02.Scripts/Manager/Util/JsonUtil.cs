@@ -327,9 +327,8 @@ namespace ProjectZ.Manager
 
         private static bool _isInit = false;
         {InitializeMethod(assetName)}
-
-        public static List<Data> DataList => _dataList;
-        public static Dictionary<long, Data> DataDic => _dataDic;
+        {GetDataMethod()}
+        {PropertyMethod()}
     }}");
 
             return builder.ToString();
@@ -375,11 +374,11 @@ namespace ProjectZ.Manager
             if (_isInit)
                 return;
 
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             var jsonData = File.ReadAllText($""{{UnityEngine.Application.dataPath}}/{JSON_PATH_WITHOUT_ASSETS}{assetName}.json"");
-            #elif UNITY_STANDALONE
+#elif UNITY_STANDALONE
             var jsonData = File.ReadAllText($""{{UnityEngine.Application.streamingAssetsPath}}/Json/{assetName}.json"");
-            #endif
+#endif
             Manager.JsonUtil.Deserialize(jsonData, _dataList);
 
             foreach (var item in _dataList)
@@ -389,6 +388,37 @@ namespace ProjectZ.Manager
         }}";
 
             return mehtodString;
+        }
+
+        private static string GetDataMethod()
+        {
+            StringBuilder builder = new();
+
+            builder.Append($@"
+        /// <summary>
+        /// 아이디 값으로 데이터 가져오기
+        /// </summary>
+        /// <param name=""id"">해당하는 테이블 아이디</param>
+        public static Data GetData(long id)
+        {{
+            if (_dataDic.ContainsKey(id))
+                return _dataDic[id];
+            else
+                return null;
+        }}");
+
+            return builder.ToString();
+        }
+
+        private static string PropertyMethod()
+        {
+            StringBuilder builder = new();
+
+            builder.Append($@"
+        public static List<Data> DataList => _dataList;
+        ");
+
+            return builder.ToString();
         }
 
         public static bool IsExist(string path)

@@ -13,6 +13,7 @@ namespace ProjectZ.Manager
         {
             Model.ModelItem.Model.Initialize();
             Model.ModelInventoryTab.Model.Initialize();
+            Model.ModelFood.Model.Initialize();
         }
     }
 }

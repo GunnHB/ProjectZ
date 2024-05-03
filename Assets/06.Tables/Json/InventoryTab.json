@@ -40,7 +40,7 @@
 "type": "Default",
 "normal_sprite": "etc_unselect",
 "select_sprite": "etc_select",
-"order": 6
+"order": 16
 }
 ]
 }

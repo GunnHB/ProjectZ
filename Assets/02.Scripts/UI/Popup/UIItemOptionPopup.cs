@@ -50,6 +50,8 @@ namespace ProjectZ.UI
 
         private float _originBgAlpha = 0f;
 
+        private bool _isEquipmentItem;
+
         protected override void Init()
         {
             base.Init();
@@ -93,6 +95,8 @@ namespace ProjectZ.UI
             _invenItemData = data;
             _targetSlotTransform = slotTr;
 
+            _isEquipmentItem = false;
+
             InitButtons();
             SetPosition(scrollViewHight);
             SetTempSlot(data);
@@ -105,13 +109,19 @@ namespace ProjectZ.UI
             _useButton.gameObject.SetActive(_invenItemData._inventoryItemData.type != Manager.GameValue.ItemType.Default);
 
             if (_invenItemData._isEquip)
+            {
                 _useButton.SetButtonText("REMOVE");
+                _isEquipmentItem = true;
+            }
             else
             {
                 if (_invenItemData._inventoryItemData.type == Manager.GameValue.ItemType.Food)
                     _useButton.SetButtonText("USE");
                 else
+                {
                     _useButton.SetButtonText("EQUIP");
+                    _isEquipmentItem = true;
+                }
             }
 
             _dropButton.SetButtonText("DROP");
@@ -170,6 +180,14 @@ namespace ProjectZ.UI
             }
             else
             {
+                // 여기는 food
+                if (!_isEquipmentItem)
+                {
+                    var foodItem = Model.ModelFood.Model.GetData(_invenItemData._inventoryItemData.ref_id);
+
+                    if (foodItem == null)
+                        return;
+                }
                 // 장착 안함
             }
         }
