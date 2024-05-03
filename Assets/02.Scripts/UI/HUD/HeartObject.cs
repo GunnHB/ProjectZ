@@ -31,6 +31,9 @@ namespace ProjectZ.UI
 
         private Coroutine _activeHeartCoroutine;
 
+        public bool IsEmpty => _heartType == HeartType.None;
+        public bool IsFull => _heartType == HeartType.Full;
+
         private void Awake()
         {
             // 딕셔너리 등록
@@ -58,68 +61,23 @@ namespace ProjectZ.UI
                 _heartObjList[index].gameObject.SetActive(true);
         }
 
-        private void Update()
+        public void ActiveHeartByOne(bool active)
         {
-            if (Input.GetKeyDown(KeyCode.T))
-                ActiveHeart(HeartType.AQuarter);
-        }
-
-        /// <summary>
-        /// 빛나는 효과 시퀀스
-        /// </summary>
-        /// <param name="targetType">목표 타입</param>
-        /// <returns></returns>
-        public Sequence GlowSequence(HeartType targetType)
-        {
-            return DOTween.Sequence();
-        }
-
-        /// <summary>
-        /// 활성화 / 비활성화 시퀀스
-        /// </summary>
-        /// <param name="targetType">목표 타입</param>
-        /// <returns></returns>
-        public Sequence ActiveSequence(HeartType targetType)
-        {
-            var sequence = DOTween.Sequence();
-
-            for (int index = (int)HeartType.Full - 1; index >= (int)targetType; index--)
+            if (active)
             {
-                sequence.AppendCallback(() =>
-                        {
-                            _heartObjList[index].gameObject.SetActive(false);
-                            Debug.Log($"{name}'s {_heartObjList[index]} is deactive");
-                        })
-                        .SetDelay(.05f);
+                if (IsFull)
+                    return;
+
+                _heartType += 1;
+                _heartDictionary[_heartType].gameObject.SetActive(true);
             }
-
-            return sequence;
-        }
-
-        public void ActiveHeart(HeartType targetType)
-        {
-            if (_activeHeartCoroutine != null)
+            else
             {
-                StopCoroutine(_activeHeartCoroutine);
-                _activeHeartCoroutine = null;
-            }
+                if (IsEmpty)
+                    return;
 
-            _activeHeartCoroutine = StartCoroutine(nameof(ActiveHeartCoroutine), targetType);
-        }
-
-        private IEnumerator ActiveHeartCoroutine(HeartType targetType)
-        {
-            HeartType tempType = HeartType.Full;
-
-            while (true)
-            {
-                if (tempType == targetType)
-                    yield break;
-
-                _heartDictionary[tempType].gameObject.SetActive(false);
-                tempType -= 1;
-
-                yield return new WaitForSeconds(.05f);
+                _heartDictionary[_heartType].gameObject.SetActive(false);
+                _heartType -= 1;
             }
         }
     }

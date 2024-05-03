@@ -1,3 +1,5 @@
+using System.Collections;
+
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,12 +14,13 @@ namespace ProjectZ.UI
         [SerializeField] private ObjectPool _heartPool;
 
         private Core.Characters.PlayerStats _playerStats;
-        private Coroutine _fillHeartCoroutine;
 
         public UnityAction<int> OnHealthBarAction;
 
         private System.Collections.Generic.List<HeartObject> _heartList = new();
         private int _lastFillHeartIndex = 0;
+
+        private Coroutine _healthBarCoroutine;
 
         protected override void Init()
         {
@@ -28,14 +31,16 @@ namespace ProjectZ.UI
         {
             base.OnEnable();
 
-            OnHealthBarAction += (int value) => OnHealthBarCallback(value);
+            OnHealthBarAction += StartHealthBarCoroutine;
+            // OnHealthBarAction += (int value) => OnHealthBarCallback(value);
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
 
-            OnHealthBarAction -= (int value) => OnHealthBarCallback(value);
+            OnHealthBarAction -= StartHealthBarCoroutine;
+            // OnHealthBarAction -= (int value) => OnHealthBarCallback(value);
         }
 
         public void InitHeart(Core.Characters.PlayerStats stats)
@@ -99,18 +104,40 @@ namespace ProjectZ.UI
                 return HeartObject.HeartType.None;
         }
 
-        private Sequence OnHealthBarCallback(int value)
+        private void StartHealthBarCoroutine(int value)
         {
-            var sequence = DOTween.Sequence();
-
-            var targetIndex = Mathf.Abs(value) / 5;
-
-            for (int index = 0; index < targetIndex; index++)
+            if (_healthBarCoroutine != null)
             {
-                // _heartList[_lastFillHeartIndex].SetHeart(())
+                StopCoroutine(_healthBarCoroutine);
+                _healthBarCoroutine = null;
             }
 
-            return sequence;
+            _healthBarCoroutine = StartCoroutine(nameof(HealthBarCoroutine), value);
+        }
+
+        private IEnumerator HealthBarCoroutine(int value)
+        {
+            var tempValue = Mathf.Abs(value) / 5;
+
+            for (int index = 0; index < tempValue; index++)
+            {
+                _heartList[_lastFillHeartIndex].ActiveHeartByOne(value > 0);
+
+                if (value > 0)
+                {
+                    if (_heartList[_lastFillHeartIndex].IsFull)
+                        _lastFillHeartIndex++;
+                }
+                else
+                {
+                    if (_heartList[_lastFillHeartIndex].IsEmpty)
+                        _lastFillHeartIndex--;
+                }
+
+                _lastFillHeartIndex = Mathf.Clamp(_lastFillHeartIndex, 0, _heartList.Count - 1);
+
+                yield return new WaitForSeconds(.05f);
+            }
         }
     }
 }
