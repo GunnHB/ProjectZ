@@ -34,6 +34,16 @@ namespace ProjectZ.Manager
             Default,
         }
 
+        public enum StatsType
+        {
+            [EnumMember(Value = "None")]
+            None = -1,
+            [EnumMember(Value = "HP")]
+            HP,
+            [EnumMember(Value = "Stamina")]
+            Stamina,
+        }
+
         public readonly static float STAMINA_REDUCE = .7f;
         public readonly static float STAMINA_CHARGE = 1f;
 

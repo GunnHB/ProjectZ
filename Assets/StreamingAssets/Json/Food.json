@@ -1,0 +1,29 @@
+{
+"Data": [
+{
+"id": 60101001,
+"target_stats": "HP",
+"increase_value": 5
+},
+{
+"id": 60101002,
+"target_stats": "HP",
+"increase_value": 10
+},
+{
+"id": 60101003,
+"target_stats": "HP",
+"increase_value": -10
+},
+{
+"id": 60101004,
+"target_stats": "Stamina",
+"increase_value": 30
+},
+{
+"id": 60101005,
+"target_stats": "Stamina",
+"increase_value": 40
+}
+]
+}
