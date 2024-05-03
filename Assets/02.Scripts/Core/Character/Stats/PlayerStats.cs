@@ -54,8 +54,8 @@ namespace ProjectZ.Core.Characters
 
             _healthBar.InitHeart(this);
 
-            OnUpdateHPEvent.RemoveListener((int value) => _healthBar.OnHealthBarAction?.Invoke(value));
-            OnUpdateHPEvent.AddListener((int value) => _healthBar.OnHealthBarAction?.Invoke(value));
+            OnHealthEvent.RemoveListener((int value) => _healthBar.OnHealthBarAction?.Invoke(value));
+            OnHealthEvent.AddListener((int value) => _healthBar.OnHealthBarAction?.Invoke(value));
         }
 
         public void SetStamina(float amount)

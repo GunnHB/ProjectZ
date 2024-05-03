@@ -16,7 +16,7 @@ namespace ProjectZ.Core.Characters
 
         public int CurrentHP { get; protected set; }
 
-        public UnityEvent<int> OnUpdateHPEvent = new();
+        public UnityEvent<int> OnHealthEvent = new();
         public UnityEvent OnDeathEvent = new();
 
         private bool _isDeath = false;
@@ -48,7 +48,7 @@ namespace ProjectZ.Core.Characters
                 return;
             }
 
-            OnUpdateHPEvent?.Invoke(amount);
+            OnHealthEvent?.Invoke(amount);
         }
     }
 }

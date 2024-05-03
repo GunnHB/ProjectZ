@@ -81,6 +81,8 @@ namespace ProjectZ.Core.Characters
 
             RegistAllInputs();
             RegistAllFSMActions();
+
+            Manager.GameManager.Instance.ThisPlayerStats = (PlayerStats)_stats;
         }
 
         protected override void OnDisable()
@@ -89,6 +91,8 @@ namespace ProjectZ.Core.Characters
 
             UnregistAllInputs();
             UnregistAllFSMActions();
+
+            Manager.GameManager.Instance.ThisPlayerStats = null;
         }
 
         // 각종 이벤트의 콜백 등록 (Action, Func, ...) 

@@ -43,13 +43,13 @@ namespace ProjectZ.Core.Characters
 
         protected virtual void OnEnable()
         {
-            _stats.OnUpdateHPEvent.AddListener(OnUpdateHP);
+            _stats.OnHealthEvent.AddListener(OnUpdateHP);
             _stats.OnDeathEvent.RemoveListener(OnDeath);
         }
 
         protected virtual void OnDisable()
         {
-            _stats.OnUpdateHPEvent.RemoveListener(OnUpdateHP);
+            _stats.OnHealthEvent.RemoveListener(OnUpdateHP);
             _stats.OnDeathEvent.RemoveListener(OnDeath);
         }
 

@@ -187,8 +187,10 @@ namespace ProjectZ.UI
 
                     if (foodItem == null)
                         return;
+
+                    if (foodItem.target_stats == Manager.GameValue.StatsType.HP)
+                        Manager.GameManager.Instance.ThisPlayerStats.OnHealthEvent?.Invoke((int)foodItem.increase_value);
                 }
-                // 장착 안함
             }
         }
 
