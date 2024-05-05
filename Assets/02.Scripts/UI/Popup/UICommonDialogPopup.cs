@@ -79,6 +79,7 @@ namespace ProjectZ.UI
             float targetAlpha = show ? 1f : 0f;
 
             return DOTween.Sequence()
+                        .SetUpdate(true)
                         .OnStart(() =>
                         {
                             _confirmButton.enabled = false;

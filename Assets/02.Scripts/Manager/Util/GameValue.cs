@@ -66,5 +66,11 @@ namespace ProjectZ.Manager
 
         // 한 줄에 들어가는 슬롯 수
         public readonly static int INVEN_ROW_AMOUNT = 6;
+
+        // Time Scale
+        public readonly static float TIME_PAUSE = 0f;
+        public readonly static float TIME_PLAY = 1f;
+        public readonly static float TIME_SLOW = .5f;
+        public readonly static float TIME_FAST = 2f;
     }
 }

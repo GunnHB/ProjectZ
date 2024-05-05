@@ -90,6 +90,7 @@ namespace ProjectZ.UI
             float duration = .2f;
 
             return DOTween.Sequence()
+                        .SetUpdate(true)
                         .OnStart(() =>
                         {
                             // 닫을 때만 실행됨
@@ -101,6 +102,7 @@ namespace ProjectZ.UI
                                     Manager.UIManager.Instance.CloseUI(popup);
                             }
 
+                            Manager.TimeScaleManager.Instance.SetTimeSalce(Manager.TimeScaleManager.TimeType.Pause);
                         })
                         .Append(transform.DOScale(targetScale, duration).From(fromScale).SetEase(doEase))
                         .Join(transform.GetComponent<CanvasGroup>().DOFade(targetAlpha, duration).From(fromAlpha))
@@ -110,7 +112,10 @@ namespace ProjectZ.UI
                                 completeListener?.Invoke();
 
                             if (!show)
+                            {
+                                Manager.TimeScaleManager.Instance.SetTimeSalce(Manager.TimeScaleManager.TimeType.Play);
                                 Manager.UIManager.Instance.CloseUI(this);
+                            }
                         });
         }
     }

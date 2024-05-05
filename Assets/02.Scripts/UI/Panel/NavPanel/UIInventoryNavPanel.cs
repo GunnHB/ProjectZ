@@ -154,6 +154,7 @@ namespace ProjectZ.UI
             float duration = .2f;
 
             return DOTween.Sequence()
+                            .SetUpdate(true)
                             .Append(group.DOFade(targetAlpha, duration).From(fromAlpha))
                             .Join(group.transform.DOLocalMoveX(targetPositionX, duration).From(fromPositionX));
         }
@@ -219,6 +220,7 @@ namespace ProjectZ.UI
         private Sequence ScrollRectSequence(float targetPosition, UnityAction<float> listener)
         {
             return DOTween.Sequence()
+                        .SetUpdate(true)
                         .Append(DOTween.To(() => _scrollRect.verticalNormalizedPosition, x => _scrollRect.verticalNormalizedPosition = x, targetPosition, .2f))
                         .OnComplete(() =>
                         {

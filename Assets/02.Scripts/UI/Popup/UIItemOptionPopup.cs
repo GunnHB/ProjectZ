@@ -222,7 +222,7 @@ namespace ProjectZ.UI
         private Sequence OpenSequence()
         {
             return DOTween.Sequence()
-                        .SetAutoKill(false)
+                        .SetUpdate(true)
                         .OnStart(() =>
                         {
                             // 애니 시작 시 버튼 비활성화
@@ -231,12 +231,9 @@ namespace ProjectZ.UI
                             _cancelButton.enabled = false;
                         })
                         .Append(_bgImage.DOFade(_originBgAlpha, .2f).From(0f))
-                        .AppendCallback(() =>
-                        {
-                            _buttonGroup.DOMoveY(_buttonGroup.position.y, .2f)
-                                        .From(_buttonGroup.position.y + 15f * (_positionType == PositionType.Up ? 1 : -1));
-                            _buttonGroup.GetComponent<CanvasGroup>().DOFade(1f, .2f).From(0f);
-                        })
+                        .Append(_buttonGroup.DOMoveY(_buttonGroup.position.y, .2f)
+                                        .From(_buttonGroup.position.y + 15f * (_positionType == PositionType.Up ? 1 : -1)))
+                        .Join(_buttonGroup.GetComponent<CanvasGroup>().DOFade(1f, .2f).From(0f))
                         .OnComplete(() =>
                         {
                             // 애니 완료 후 버튼 활성화
@@ -249,7 +246,7 @@ namespace ProjectZ.UI
         private Sequence CloseSequence(UnityEngine.Events.UnityAction startListener = null)
         {
             return DOTween.Sequence()
-                        .SetAutoKill(false)
+                        .SetUpdate(true)
                         .OnStart(() =>
                         {
                             if (startListener != null)
@@ -259,12 +256,9 @@ namespace ProjectZ.UI
                             _dropButton.enabled = false;
                             _cancelButton.enabled = false;
                         })
-                        .AppendCallback(() =>
-                        {
-                            _buttonGroup.DOMoveY(_buttonGroup.position.y + 15f * (_positionType == PositionType.Up ? 1 : -1f), .2f)
-                                        .From(_buttonGroup.position.y);
-                            _buttonGroup.GetComponent<CanvasGroup>().DOFade(0f, .2f).From(1f);
-                        })
+                        .Append(_buttonGroup.DOMoveY(_buttonGroup.position.y + 15f * (_positionType == PositionType.Up ? 1 : -1f), .2f)
+                                        .From(_buttonGroup.position.y))
+                        .Join(_buttonGroup.GetComponent<CanvasGroup>().DOFade(0f, .2f).From(1f))
                         .Append(_bgImage.DOFade(0f, .3f).From(_originBgAlpha));
         }
     }
