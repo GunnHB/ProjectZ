@@ -5,17 +5,19 @@ using UnityEngine.Events;
 
 using ProjectZ.Manager;
 
-using DG.Tweening;
+using TMPro;
 
 namespace ProjectZ.UI
 {
     public class UIPlayerMenuBarFloating : UIFloatingBase
     {
         [SerializeField] private ObjectPool _heartPool;
+        [SerializeField] private TextMeshProUGUI _goldText;
 
         private Core.Characters.PlayerStats _playerStats;
 
         public UnityAction<int> OnHealthBarAction;
+        public UnityAction<int> OnGoldTextAction;
 
         private System.Collections.Generic.List<HeartObject> _heartList = new();
         private int _lastFillHeartIndex = 0;
@@ -25,6 +27,13 @@ namespace ProjectZ.UI
         protected override void Init()
         {
             base.Init();
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+
+            InitGold();
         }
 
         protected override void OnEnable()
@@ -137,6 +146,11 @@ namespace ProjectZ.UI
                 // yield return new WaitForSeconds(.05f);
                 yield return new WaitForSecondsRealtime(.05f);
             }
+        }
+
+        private void InitGold()
+        {
+            _goldText.text = string.Format("{0:n0}", ItemManager.Instance.ThisInventoryData.Gold);
         }
     }
 }

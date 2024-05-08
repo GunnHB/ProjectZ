@@ -37,10 +37,9 @@ namespace ProjectZ.Data
     {
         // 아이템 타입 / 타입에 따른 아이템 데이터 리스트
         private Dictionary<GameValue.ItemType, List<InventoryItemData>> _inventoryDic = new();
-        private int _gold = 0;
 
         public Dictionary<GameValue.ItemType, List<InventoryItemData>> InventoryDic => _inventoryDic;
-        public int Gold => _gold;
+        public int Gold { get; set; }
 
         public InventoryData()
         {
@@ -53,7 +52,7 @@ namespace ProjectZ.Data
             _inventoryDic.Add(GameValue.ItemType.Default, ItemDataList(GameValue.INVEN_DEFAULT_SLOT_AMOUNT));
 
             // 골드 데이터
-            _gold = 0;
+            Gold = 0;
         }
 
         // 공갈 데이터 리스트

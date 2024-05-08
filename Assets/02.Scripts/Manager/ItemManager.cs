@@ -120,8 +120,16 @@ namespace ProjectZ.Manager
             AddItem(new InventoryItemData()
             {
                 _inventoryItemData = Model.ModelItem.Model.GetData(10105003),
-                _itemAmount = 15,
+                _itemAmount = 11,
             });
+
+            AddItem(new InventoryItemData()
+            {
+                _inventoryItemData = Model.ModelItem.Model.GetData(10105005),
+                _itemAmount = 12,
+            });
+
+            _inventoryData.Gold += 1000;
         }
 
         public void AddItem(InventoryItemData invenItemData)
