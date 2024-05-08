@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ProjectZ.Core.Characters
 {
-    public class EnemyControls : CharacterControls
+    public partial class EnemyControls : CharacterControls
     {
         // properties
         public EnemyStats ThisEnemyStats => _stats as EnemyStats;
@@ -24,9 +24,17 @@ namespace ProjectZ.Core.Characters
             base.OnDisable();
         }
 
+        private void Start()
+        {
+            InitRootNodeList();
+            InitBTRunner();
+        }
+
         protected override void Update()
         {
             base.Update();
+
+            OperateBTRunner();
         }
 
         private void InitAnimData()
