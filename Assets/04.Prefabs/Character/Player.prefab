@@ -4525,7 +4525,7 @@ MonoBehaviour:
   _maxDistance: 1
   _groundMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1024
   _drawGizmo: 0
 --- !u!114 &2744805162452941045
 MonoBehaviour:
@@ -4560,5 +4560,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: 79e4ab526fd1fe4468c3c691de6b929c, type: 2}
-  _weaponTester: {fileID: 0}
   _playerCam: {fileID: 0}

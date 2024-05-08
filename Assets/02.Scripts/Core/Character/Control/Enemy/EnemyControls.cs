@@ -12,6 +12,7 @@ namespace ProjectZ.Core.Characters
             base.Awake();
 
             InitAnimData();
+            InitRootNodeList();
         }
 
         protected override void OnEnable()
@@ -26,14 +27,12 @@ namespace ProjectZ.Core.Characters
 
         private void Start()
         {
-            InitRootNodeList();
             InitBTRunner();
         }
 
-        protected override void Update()
+        // 외부 클래스의 update문에서 호출
+        public void DoUpdate()
         {
-            base.Update();
-
             OperateBTRunner();
         }
 
@@ -42,6 +41,11 @@ namespace ProjectZ.Core.Characters
             _animData = new Data.EnemyAnimationData();
 
             _animData.InitializeData();
+        }
+
+        protected void PlayAnimation(int animHash)
+        {
+
         }
 
         // #region Attack

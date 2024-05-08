@@ -4514,12 +4514,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa5c1716bb1eabd468459a482b3962ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundTransform: {fileID: 0}
-  _boxSize: {x: 0, y: 0, z: 0}
-  _maxDistance: 0
+  _groundTransform: {fileID: 8986551880895052543}
+  _boxSize: {x: 0.5, y: 0.05, z: 0.5}
+  _maxDistance: 1
   _groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   _drawGizmo: 0
 --- !u!114 &6514956422194364901
 MonoBehaviour:
@@ -4534,3 +4534,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: 23c86ad0e8e67dc4b8f6f1c79957a2cf, type: 2}
+--- !u!4 &8986551880895052543 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8158044366898381601, guid: 4cfa495e65d7eca48bb3db5ea33eaeda,
+    type: 3}
+  m_PrefabInstance: {fileID: 973225511688141278}
+  m_PrefabAsset: {fileID: 0}

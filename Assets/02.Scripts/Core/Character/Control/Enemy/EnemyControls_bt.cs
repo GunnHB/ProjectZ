@@ -1,13 +1,15 @@
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
+
+using ProjectZ.Core.BehaviorTree;
 
 namespace ProjectZ.Core.Characters
 {
     public partial class EnemyControls : CharacterControls
     {
-        private BehaviorTree.BehaviorTreeRunner _btRunner;
+        private BehaviorTreeRunner _btRunner;
 
-        private List<BehaviorTree.INode> _rootNodeList;
+        private List<INode> _rootNodeList;
 
         /// <summary>
         /// 행동트리 초기화
@@ -19,13 +21,13 @@ namespace ProjectZ.Core.Characters
             // 새로운 행동트리는 appendbt나 insertbt를 사용하여요
             _rootNodeList = new()
             {
-
+                new ActionNode(IdleNode),
             };
         }
 
         private void InitBTRunner()
         {
-            _btRunner = new BehaviorTree.BehaviorTreeRunner(new BehaviorTree.SelectorNode(_rootNodeList));
+            _btRunner = new BehaviorTreeRunner(new SelectorNode(_rootNodeList));
         }
 
         private void OperateBTRunner()
@@ -37,7 +39,7 @@ namespace ProjectZ.Core.Characters
         /// 맨 뒤에 추가할 노드
         /// </summary>
         /// <param name="node"></param>
-        protected void AppendBT(BehaviorTree.INode node)
+        protected void AppendBT(INode node)
         {
             _rootNodeList.Append(node);
         }
@@ -46,9 +48,14 @@ namespace ProjectZ.Core.Characters
         /// 맨 앞에 추가할 노드
         /// </summary>
         /// <param name="nodeList"></param>
-        protected void InsertBT(BehaviorTree.INode node)
+        protected void InsertBT(INode node)
         {
             _rootNodeList.Insert(0, node);
+        }
+
+        private INode.ENodeState IdleNode()
+        {
+            return INode.ENodeState.RunningState;
         }
     }
 }
