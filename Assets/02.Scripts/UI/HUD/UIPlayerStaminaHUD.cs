@@ -5,9 +5,9 @@ using Sirenix.OdinInspector;
 
 namespace ProjectZ.UI
 {
-    public class UIPlayerStaminaInfoFloating : UIFloatingBase
+    public class UIPlayerStaminaHUD : UIHUDBase
     {
-        [Title(TITLE_FLOATING)]
+        [Title(TITLE_HUD)]
         [SerializeField] private GameObject _parent;
         [SerializeField] private Image _redWheel;
         [SerializeField] private Image _greenWheel;

@@ -17,7 +17,7 @@ namespace ProjectZ.Core.Characters
         public float CurrentStamina { get; protected set; }
 
         // ui
-        private UIPlayerHealthBarHUD _healthBar;
+        private UIPlayerMenuBarFloating _healthBar;
 
         // delegate
         public delegate void OnExhausted();
@@ -47,7 +47,7 @@ namespace ProjectZ.Core.Characters
 
         private void OpenPlayerHealthUI()
         {
-            _healthBar = Manager.UIManager.Instance.OpenUI<UIPlayerHealthBarHUD>();
+            _healthBar = Manager.UIManager.Instance.OpenUI<UIPlayerMenuBarFloating>();
 
             if (_healthBar == null)
                 return;

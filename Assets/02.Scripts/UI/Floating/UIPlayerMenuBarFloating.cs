@@ -9,7 +9,7 @@ using DG.Tweening;
 
 namespace ProjectZ.UI
 {
-    public class UIPlayerHealthBarHUD : UIHUDBase
+    public class UIPlayerMenuBarFloating : UIFloatingBase
     {
         [SerializeField] private ObjectPool _heartPool;
 

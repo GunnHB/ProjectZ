@@ -13,7 +13,7 @@ namespace ProjectZ.Core.FSM
         protected UI.UIPlayerStateInfoHUD _stateInfoHUD;
 
         // 스태미나 ui
-        protected UI.UIPlayerStaminaInfoFloating _staminaInfo;
+        protected UI.UIPlayerStaminaHUD _staminaInfo;
 
         protected float _currVertical = 0f;
 
@@ -34,7 +34,7 @@ namespace ProjectZ.Core.FSM
             // 스태미나 ui
             if (_staminaInfo == null)
             {
-                _staminaInfo = Manager.UIManager.Instance.OpenUI<UI.UIPlayerStaminaInfoFloating>();
+                _staminaInfo = Manager.UIManager.Instance.OpenUI<UI.UIPlayerStaminaHUD>();
 
                 if (_staminaInfo != null)
                     _staminaInfo.SetStats(_pControls.ThisPlayerStats);

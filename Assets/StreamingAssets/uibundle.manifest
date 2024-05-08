@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 968582185
+CRC: 3105185278
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4aba6ba9051a0240df8117fc30699fc2
+    Hash: fd42c5f4c6bb7cc4965ed7b9116ccad5
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 885834ab8fc79f22a2609ea9a6d0ed40
+    Hash: 8aa3717c2a58e0060a0c4e7f97dbb49b
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 4aba6ba9051a0240df8117fc30699fc2
+    Hash: fd42c5f4c6bb7cc4965ed7b9116ccad5
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -36,8 +36,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: f2f23883ba80afd4b988b9c3ef536c45, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 67e90ff58994eb64ea00a6602f4df0cf, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 - Class: 114
@@ -71,11 +69,13 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 2e4db01cc7320864598b4a55ca2dbd4c, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 33cbb9115e1dccc4db093d235debde25, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 15581fc97414e5940bb1df19e49c357a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 67e90ff58994eb64ea00a6602f4df0cf, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2e4db01cc7320864598b4a55ca2dbd4c, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -156,13 +156,13 @@ Assets:
 - Assets/04.Prefabs/UI/Panel/UIMenuPanel.prefab
 - Assets/04.Prefabs/UI/Panel/NavPanel/Inventory/Inventory/InventoryTab.prefab
 - Assets/04.Prefabs/UI/Panel/NavPanel/Inventory/Inventory/InventoryInfo.prefab
-- Assets/04.Prefabs/UI/HUD/UIPlayerHealthBarHUD.prefab
+- Assets/04.Prefabs/UI/Floating/UIPlayerMenuBarFloating.prefab
 - Assets/04.Prefabs/UI/HUD/UIPlayerStateInfoHUD.prefab
 - Assets/04.Prefabs/UI/Panel/NavPanel/Inventory/UIInventoryNavPanel.prefab
-- Assets/04.Prefabs/UI/Floating/UIPlayerStaminaInfoFloating.prefab
+- Assets/04.Prefabs/UI/HUD/UIPlayerStaminaHUD.prefab
 - Assets/04.Prefabs/UI/Popup/UICommonDialogPopup.prefab
 - Assets/04.Prefabs/UI/Popup/UIItemOptionPopup.prefab
 - Assets/04.Prefabs/UI/Panel/NavPanel/Inventory/Inventory/InventorySlot.prefab
 - Assets/04.Prefabs/UI/Popup/UISlideDialogPopup.prefab
-- Assets/04.Prefabs/UI/HUD/HeartObject.prefab
+- Assets/04.Prefabs/UI/Floating/HeartObject.prefab
 Dependencies: []

@@ -84,9 +84,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1910429386961868180}
-  - component: {fileID: -8930959141359601320}
+  - component: {fileID: 6168503406783262854}
   m_Layer: 5
-  m_Name: UIPlayerStaminaInfoFloating
+  m_Name: UIPlayerStaminaHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +112,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &-8930959141359601320
+--- !u!114 &6168503406783262854
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
