@@ -155,12 +155,12 @@ namespace ProjectZ.Manager
             }
         }
 
-        public void DropItem(InventoryItemData invenItemData, int amount = 1)
+        public void UpdateItemAmount(InventoryItemData invenItemData, int amount = 1)
         {
             if (invenItemData == null)
                 return;
 
-            _inventoryData.DropItem(invenItemData, amount);
+            _inventoryData.UpdateItemAmount(invenItemData, amount);
         }
     }
 }

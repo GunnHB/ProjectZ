@@ -190,6 +190,11 @@ namespace ProjectZ.UI
 
                     if (foodItem.target_stats == Manager.GameValue.StatsType.HP)
                         Manager.GameManager.Instance.ThisPlayerStats.OnHealthEvent?.Invoke((int)foodItem.increase_value);
+
+                    Manager.UIManager.Instance.CloseUI(this, CloseSequence(() =>
+                    {
+                        Manager.ItemManager.Instance.UpdateItemAmount(_invenItemData);
+                    }));
                 }
             }
         }
@@ -201,7 +206,7 @@ namespace ProjectZ.UI
             else
                 Manager.UIManager.Instance.CloseUI(this, CloseSequence(() =>
                 {
-                    Manager.ItemManager.Instance.DropItem(_invenItemData);
+                    Manager.ItemManager.Instance.UpdateItemAmount(_invenItemData);
                 }));
         }
 
@@ -211,7 +216,7 @@ namespace ProjectZ.UI
 
             if (dialog != null)
                 dialog.SetSlideDialog("Notice", "Select amount", itemData, string.Empty, string.Empty,
-                                    () => Manager.ItemManager.Instance.DropItem(_invenItemData, dialog.SliderValue));
+                                    () => Manager.ItemManager.Instance.UpdateItemAmount(_invenItemData, dialog.SliderValue));
         }
 
         private void OnClickCancelButton()

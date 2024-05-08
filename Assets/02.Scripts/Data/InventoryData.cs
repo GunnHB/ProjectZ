@@ -67,7 +67,7 @@ namespace ProjectZ.Data
             return list;
         }
 
-        internal void DropItem(InventoryItemData invenItemData, int amount)
+        internal void UpdateItemAmount(InventoryItemData invenItemData, int amount)
         {
             var tempData = TargetInventoryItemData(invenItemData);
 

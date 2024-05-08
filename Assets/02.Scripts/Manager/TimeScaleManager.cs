@@ -14,6 +14,7 @@ namespace ProjectZ.Manager
         }
 
         private static TimeType _timeType = TimeType.None;
+        public TimeType ThisTimeType => _timeType;
 
         protected override void Awake()
         {

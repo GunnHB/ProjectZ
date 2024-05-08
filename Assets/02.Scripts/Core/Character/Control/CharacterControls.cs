@@ -43,14 +43,14 @@ namespace ProjectZ.Core.Characters
 
         protected virtual void OnEnable()
         {
-            _stats.OnHealthEvent.AddListener(OnUpdateHP);
-            _stats.OnDeathEvent.RemoveListener(OnDeath);
+            _stats.OnHealthEvent.AddListener(PlayGetDamageAnimation);
+            _stats.OnDeathEvent.RemoveListener(PlayDeathAnimation);
         }
 
         protected virtual void OnDisable()
         {
-            _stats.OnHealthEvent.RemoveListener(OnUpdateHP);
-            _stats.OnDeathEvent.RemoveListener(OnDeath);
+            _stats.OnHealthEvent.RemoveListener(PlayGetDamageAnimation);
+            _stats.OnDeathEvent.RemoveListener(PlayDeathAnimation);
         }
 
         protected virtual void Update()
@@ -94,9 +94,9 @@ namespace ProjectZ.Core.Characters
             _stats.UpdateCurrentHP(damageAmount);
         }
 
-        public void OnUpdateHP(int value)
+        public void PlayGetDamageAnimation(int value)
         {
-            if (value == 0)
+            if (value == 0 || Manager.TimeScaleManager.Instance.ThisTimeType == Manager.TimeScaleManager.TimeType.Pause)
                 return;
             else if (value < 0)
             {
@@ -105,7 +105,7 @@ namespace ProjectZ.Core.Characters
             }
         }
 
-        public void OnDeath()
+        public void PlayDeathAnimation()
         {
             _animator.applyRootMotion = true;
             _animator.CrossFade(_animData.AnimNameDeath, .1f);

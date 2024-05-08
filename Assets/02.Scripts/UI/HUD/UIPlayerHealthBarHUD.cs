@@ -32,7 +32,6 @@ namespace ProjectZ.UI
             base.OnEnable();
 
             OnHealthBarAction += StartHealthBarCoroutine;
-            // OnHealthBarAction += (int value) => OnHealthBarCallback(value);
         }
 
         protected override void OnDisable()
@@ -40,7 +39,6 @@ namespace ProjectZ.UI
             base.OnDisable();
 
             OnHealthBarAction -= StartHealthBarCoroutine;
-            // OnHealthBarAction -= (int value) => OnHealthBarCallback(value);
         }
 
         public void InitHeart(Core.Characters.PlayerStats stats)
@@ -136,7 +134,8 @@ namespace ProjectZ.UI
 
                 _lastFillHeartIndex = Mathf.Clamp(_lastFillHeartIndex, 0, _heartList.Count - 1);
 
-                yield return new WaitForSeconds(.05f);
+                // yield return new WaitForSeconds(.05f);
+                yield return new WaitForSecondsRealtime(.05f);
             }
         }
     }
