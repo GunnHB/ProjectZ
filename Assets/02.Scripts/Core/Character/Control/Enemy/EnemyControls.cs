@@ -7,6 +7,9 @@ namespace ProjectZ.Core.Characters
         // properties
         public EnemyStats ThisEnemyStats => _stats as EnemyStats;
 
+        [SerializeField] protected bool _isActiveIK = false;
+        [SerializeField] protected Transform _targetObj;
+
         protected override void Awake()
         {
             base.Awake();
@@ -46,6 +49,20 @@ namespace ProjectZ.Core.Characters
         protected void PlayAnimation(int animHash)
         {
 
+        }
+
+        private void OnAnimatorIK()
+        {
+            if (_isActiveIK)
+            {
+                if (_targetObj != null)
+                {
+                    _animator.SetLookAtWeight(1);
+                    _animator.SetLookAtPosition(_targetObj.position);
+                }
+            }
+            else
+                _animator.SetLookAtWeight(0);
         }
 
         // #region Attack

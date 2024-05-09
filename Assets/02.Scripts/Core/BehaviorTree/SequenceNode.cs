@@ -4,7 +4,7 @@ namespace ProjectZ.Core.BehaviorTree
 {
     /// <summary>
     /// 왼쪽에서 오른쪽으로 판단을 진행하면서 자식 노드 중 하나라도 실패를 반환하면 바로 부모 노드에 실패를 반환
-    /// <para>모든 자식 노드가 성공이나 진행 중을 반환하면 부모 노드에 결과를 반환</para>
+    /// <para>모든 자식 노드가 성공을 반환해야 부모 노드에 성공을 반환</para>
     /// </summary>
     public class SequenceNode : INode
     {

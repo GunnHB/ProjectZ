@@ -7,12 +7,15 @@ namespace ProjectZ.Core.Characters
 {
     public class OffensiveEnemyControls : EnemyControls
     {
+        private float _combatIdleTime = 2f;
+
         protected override void InitRootNodeList()
         {
-            base.InitRootNodeList();
-
             AppendBT(AttackNode());
             AppendBT(ReadyToAttackNode());
+            AppendBT(DetectTargetNode());
+
+            base.InitRootNodeList();
         }
 
         private SequenceNode AttackNode()
@@ -47,11 +50,34 @@ namespace ProjectZ.Core.Characters
         {
             return new SequenceNode(new List<INode>()
             {
-                new ActionNode(DoCombatIdle),
+                new ActionNode(DoCombatIdle),   // 공격 대기
             });
         }
 
         private INode.ENodeState DoCombatIdle()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region DetectTargetNode
+        private SequenceNode DetectTargetNode()
+        {
+            var nodeList = new List<INode>()
+            {
+                new ActionNode(DoDetectTarget),
+                new ActionNode(DoChaseTarget),
+            };
+
+            return new SequenceNode(nodeList);
+        }
+
+        private INode.ENodeState DoDetectTarget()
+        {
+            throw new NotImplementedException();
+        }
+
+        private INode.ENodeState DoChaseTarget()
         {
             throw new NotImplementedException();
         }

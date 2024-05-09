@@ -1,7 +1,10 @@
 using System.Linq;
 using System.Collections.Generic;
 
+using UnityEngine;
+
 using ProjectZ.Core.BehaviorTree;
+using System;
 
 namespace ProjectZ.Core.Characters
 {
@@ -9,7 +12,7 @@ namespace ProjectZ.Core.Characters
     {
         private BehaviorTreeRunner _btRunner;
 
-        private List<INode> _rootNodeList;
+        private List<INode> _rootNodeList = new();
 
         /// <summary>
         /// 행동트리 초기화
@@ -17,12 +20,14 @@ namespace ProjectZ.Core.Characters
         /// </summary>
         protected virtual void InitRootNodeList()
         {
-            // 적이라면 꼭 실행해야하는 행동 트리는 여기에 적으요
-            // 새로운 행동트리는 appendbt나 insertbt를 사용하여요
-            _rootNodeList = new()
-            {
-                new ActionNode(IdleNode),
-            };
+            // 꼭 실행해야하는 행동 트리는 여기에 적으요
+            // 새로운 행동은 상속받은 클래스에서 추가해주기
+            AppendBT(new ActionNode(IdleNode));
+        }
+
+        private INode.ENodeState IdleNode()
+        {
+            return INode.ENodeState.RunningState;
         }
 
         private void InitBTRunner()
@@ -51,11 +56,6 @@ namespace ProjectZ.Core.Characters
         protected void InsertBT(INode node)
         {
             _rootNodeList.Insert(0, node);
-        }
-
-        private INode.ENodeState IdleNode()
-        {
-            return INode.ENodeState.RunningState;
         }
     }
 }
